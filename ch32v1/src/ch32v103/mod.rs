@@ -46439,6 +46439,3022 @@ impl core::fmt::Debug for USBHD {
     }
 }
 ///USB register
+#[cfg(feature = "ch32v103")]
+pub mod usbhd {
+    ///Register block
+    #[repr(C)]
+    pub struct RegisterBlock {
+        ///0x00 - USB base control
+        pub usb_ctrl: USB_CTRL,
+        ///0x01 - USB device physical prot control
+        pub udev_ctrl__uhost_ctrl: UDEV_CTRL__UHOST_CTRL,
+        ///0x02 - USB interrupt enable
+        pub usb_int_en: USB_INT_EN,
+        ///0x03 - USB device address
+        pub usb_dev_ad: USB_DEV_AD,
+        _reserved4: [u8; 0x01],
+        ///0x05 - USB miscellaneous status
+        pub usb_mis_st: USB_MIS_ST,
+        ///0x06 - USB interrupt flag
+        pub usb_int_fg: USB_INT_FG,
+        ///0x07 - USB interrupt status
+        pub usb_int_st: USB_INT_ST,
+        ///0x08 - USB receiving length
+        pub usb_rx_len: USB_RX_LEN,
+        _reserved8: [u8; 0x03],
+        ///0x0c - endpoint 4/1 mode
+        pub uep4_1_mod: UEP4_1_MOD,
+        ///0x0d - endpoint 2/3 mode;host endpoint mode
+        pub uep2_3_mod__uh_ep_mod: UEP2_3_MOD__UH_EP_MOD,
+        _reserved10: [u8; 0x02],
+        ///0x10 - endpoint 0 DMA buffer address
+        pub uep0_dma: UEP0_DMA,
+        _reserved11: [u8; 0x02],
+        ///0x14 - endpoint 1 DMA buffer address
+        pub uep1_dma: UEP1_DMA,
+        _reserved12: [u8; 0x02],
+        ///0x18 - endpoint 2 DMA buffer address;host rx endpoint buffer high address
+        pub uep2_dma__uh_rx_dma: UEP2_DMA__UH_RX_DMA,
+        _reserved13: [u8; 0x02],
+        ///0x1c - endpoint 3 DMA buffer address;host tx endpoint buffer high address
+        pub uep3_dma__uh_tx_dma: UEP3_DMA__UH_TX_DMA,
+        _reserved14: [u8; 0x02],
+        ///0x20 - endpoint 0 transmittal length
+        pub uep0_t_len: UEP0_T_LEN,
+        _reserved15: [u8; 0x01],
+        ///0x22 - endpoint 0 control
+        pub uep0_ctrl: UEP0_CTRL,
+        _reserved16: [u8; 0x01],
+        ///0x24 - endpoint 1 transmittal length
+        pub uep1_t_len: UEP1_T_LEN,
+        _reserved17: [u8; 0x01],
+        ///0x26 - endpoint 1 control;host aux setup
+        pub uep1_ctrl__uh_setup: UEP1_CTRL__UH_SETUP,
+        _reserved18: [u8; 0x01],
+        ///0x28 - endpoint 2 transmittal length;host endpoint and PID
+        pub uep2_t_len__uh_ep_pid: UEP2_T_LEN__UH_EP_PID,
+        _reserved19: [u8; 0x01],
+        ///0x2a - endpoint 2 control;host receiver endpoint control
+        pub uep2_ctrl__uh_rx_ctrl: UEP2_CTRL__UH_RX_CTRL,
+        _reserved20: [u8; 0x01],
+        ///0x2c - endpoint 3 transmittal length;host transmittal endpoint transmittal length
+        pub uep3_t_len__uh_tx_len: UEP3_T_LEN__UH_TX_LEN,
+        _reserved21: [u8; 0x01],
+        ///0x2e - endpoint 3 control;host transmittal endpoint control
+        pub uep3_ctrl__uh_tx_ctrl: UEP3_CTRL__UH_TX_CTRL,
+        _reserved22: [u8; 0x01],
+        ///0x30 - endpoint 4 transmittal length
+        pub uep4_t_len: UEP4_T_LEN,
+        _reserved23: [u8; 0x01],
+        ///0x32 - endpoint 4 control
+        pub uep4_ctrl: UEP4_CTRL,
+        _reserved24: [u8; 0x05],
+        ///0x38 - USB type-C control
+        pub usb_type_c_ctrl: USB_TYPE_C_CTRL,
+    }
+    ///USB_CTRL (rw) register accessor: an alias for `Reg<USB_CTRL_SPEC>`
+    pub type USB_CTRL = crate::Reg<usb_ctrl::USB_CTRL_SPEC>;
+    ///USB base control
+    pub mod usb_ctrl {
+        ///Register `USB_CTRL` reader
+        pub struct R(crate::R<USB_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `USB_CTRL` writer
+        pub struct W(crate::W<USB_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<USB_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<USB_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<USB_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UC_DMA_EN` reader - DMA enable and DMA interrupt enable for USB
+        pub type UC_DMA_EN_R = crate::BitReader<bool>;
+        ///Field `UC_DMA_EN` writer - DMA enable and DMA interrupt enable for USB
+        pub type UC_DMA_EN_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        ///Field `UC_CLR_ALL` reader - force clear FIFO and count of USB
+        pub type UC_CLR_ALL_R = crate::BitReader<bool>;
+        ///Field `UC_CLR_ALL` writer - force clear FIFO and count of USB
+        pub type UC_CLR_ALL_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        ///Field `UC_RESET_SIE` reader - force reset USB SIE, need software clear
+        pub type UC_RESET_SIE_R = crate::BitReader<bool>;
+        ///Field `UC_RESET_SIE` writer - force reset USB SIE, need software clear
+        pub type UC_RESET_SIE_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        ///Field `UC_INT_BUSY` reader - enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
+        pub type UC_INT_BUSY_R = crate::BitReader<bool>;
+        ///Field `UC_INT_BUSY` writer - enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
+        pub type UC_INT_BUSY_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        ///Field `MASK_UC_SYS_CTRL` reader - bit mask of USB system control
+        pub type MASK_UC_SYS_CTRL_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UC_SYS_CTRL` writer - bit mask of USB system control
+        pub type MASK_UC_SYS_CTRL_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, USB_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UC_LOW_SPEED` reader - enable USB low speed: 0=12Mbps, 1=1.5Mbps
+        pub type UC_LOW_SPEED_R = crate::BitReader<bool>;
+        ///Field `UC_LOW_SPEED` writer - enable USB low speed: 0=12Mbps, 1=1.5Mbps
+        pub type UC_LOW_SPEED_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        ///Field `UC_HOST_MODE` reader - enable USB host mode: 0=device mode, 1=host mode
+        pub type UC_HOST_MODE_R = crate::BitReader<bool>;
+        ///Field `UC_HOST_MODE` writer - enable USB host mode: 0=device mode, 1=host mode
+        pub type UC_HOST_MODE_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bit 0 - DMA enable and DMA interrupt enable for USB
+            #[inline(always)]
+            pub fn uc_dma_en(&self) -> UC_DMA_EN_R {
+                UC_DMA_EN_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 1 - force clear FIFO and count of USB
+            #[inline(always)]
+            pub fn uc_clr_all(&self) -> UC_CLR_ALL_R {
+                UC_CLR_ALL_R::new(((self.bits >> 1) & 1) != 0)
+            }
+            ///Bit 2 - force reset USB SIE, need software clear
+            #[inline(always)]
+            pub fn uc_reset_sie(&self) -> UC_RESET_SIE_R {
+                UC_RESET_SIE_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
+            #[inline(always)]
+            pub fn uc_int_busy(&self) -> UC_INT_BUSY_R {
+                UC_INT_BUSY_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bits 4:5 - bit mask of USB system control
+            #[inline(always)]
+            pub fn mask_uc_sys_ctrl(&self) -> MASK_UC_SYS_CTRL_R {
+                MASK_UC_SYS_CTRL_R::new((self.bits >> 4) & 3)
+            }
+            ///Bit 6 - enable USB low speed: 0=12Mbps, 1=1.5Mbps
+            #[inline(always)]
+            pub fn uc_low_speed(&self) -> UC_LOW_SPEED_R {
+                UC_LOW_SPEED_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - enable USB host mode: 0=device mode, 1=host mode
+            #[inline(always)]
+            pub fn uc_host_mode(&self) -> UC_HOST_MODE_R {
+                UC_HOST_MODE_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 0 - DMA enable and DMA interrupt enable for USB
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_dma_en(&mut self) -> UC_DMA_EN_W<0> {
+                UC_DMA_EN_W::new(self)
+            }
+            ///Bit 1 - force clear FIFO and count of USB
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_clr_all(&mut self) -> UC_CLR_ALL_W<1> {
+                UC_CLR_ALL_W::new(self)
+            }
+            ///Bit 2 - force reset USB SIE, need software clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_reset_sie(&mut self) -> UC_RESET_SIE_W<2> {
+                UC_RESET_SIE_W::new(self)
+            }
+            ///Bit 3 - enable automatic responding busy for device mode or automatic pause for host mode during interrupt flag UIF_TRANSFER valid
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_int_busy(&mut self) -> UC_INT_BUSY_W<3> {
+                UC_INT_BUSY_W::new(self)
+            }
+            ///Bits 4:5 - bit mask of USB system control
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uc_sys_ctrl(&mut self) -> MASK_UC_SYS_CTRL_W<4> {
+                MASK_UC_SYS_CTRL_W::new(self)
+            }
+            ///Bit 6 - enable USB low speed: 0=12Mbps, 1=1.5Mbps
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_low_speed(&mut self) -> UC_LOW_SPEED_W<6> {
+                UC_LOW_SPEED_W::new(self)
+            }
+            ///Bit 7 - enable USB host mode: 0=device mode, 1=host mode
+            #[inline(always)]
+            #[must_use]
+            pub fn uc_host_mode(&mut self) -> UC_HOST_MODE_W<7> {
+                UC_HOST_MODE_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB base control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_ctrl](index.html) module
+        pub struct USB_CTRL_SPEC;
+        impl crate::RegisterSpec for USB_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_ctrl::R](R) reader structure
+        impl crate::Readable for USB_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [usb_ctrl::W](W) writer structure
+        impl crate::Writable for USB_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets USB_CTRL to value 0
+        impl crate::Resettable for USB_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UDEV_CTRL__UHOST_CTRL (rw) register accessor: an alias for `Reg<UDEV_CTRL__UHOST_CTRL_SPEC>`
+    pub type UDEV_CTRL__UHOST_CTRL =
+        crate::Reg<udev_ctrl__uhost_ctrl::UDEV_CTRL__UHOST_CTRL_SPEC>;
+    ///USB device physical prot control
+    pub mod udev_ctrl__uhost_ctrl {
+        ///Register `UDEV_CTRL__UHOST_CTRL` reader
+        pub struct R(crate::R<UDEV_CTRL__UHOST_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UDEV_CTRL__UHOST_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UDEV_CTRL__UHOST_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UDEV_CTRL__UHOST_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UDEV_CTRL__UHOST_CTRL` writer
+        pub struct W(crate::W<UDEV_CTRL__UHOST_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UDEV_CTRL__UHOST_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UDEV_CTRL__UHOST_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UDEV_CTRL__UHOST_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UD_PORT_EN__UH_PORT_EN` reader - enable USB physical port I/O: 0=disable, 1=enable;enable USB port: 0=disable, 1=enable port, automatic disabled if USB device detached
+        pub type UD_PORT_EN__UH_PORT_EN_R = crate::BitReader<bool>;
+        ///Field `UD_PORT_EN__UH_PORT_EN` writer - enable USB physical port I/O: 0=disable, 1=enable;enable USB port: 0=disable, 1=enable port, automatic disabled if USB device detached
+        pub type UD_PORT_EN__UH_PORT_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UDEV_CTRL__UHOST_CTRL_SPEC, bool, O>;
+        ///Field `UD_GP_BIT__UH_BUS_RESET` reader - general purpose bit;control USB bus reset: 0=normal, 1=force bus reset
+        pub type UD_GP_BIT__UH_BUS_RESET_R = crate::BitReader<bool>;
+        ///Field `UD_GP_BIT__UH_BUS_RESET` writer - general purpose bit;control USB bus reset: 0=normal, 1=force bus reset
+        pub type UD_GP_BIT__UH_BUS_RESET_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UDEV_CTRL__UHOST_CTRL_SPEC, bool, O>;
+        ///Field `UD_LOW_SPEED__UH_LOW_SPEED` reader - enable USB physical port low speed: 0=full speed, 1=low speed;enable USB port low speed: 0=full speed, 1=low speed
+        pub type UD_LOW_SPEED__UH_LOW_SPEED_R = crate::BitReader<bool>;
+        ///Field `UD_LOW_SPEED__UH_LOW_SPEED` writer - enable USB physical port low speed: 0=full speed, 1=low speed;enable USB port low speed: 0=full speed, 1=low speed
+        pub type UD_LOW_SPEED__UH_LOW_SPEED_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UDEV_CTRL__UHOST_CTRL_SPEC, bool, O>;
+        ///Field `UD_DM_PIN__UH_DM_PIN` reader - ReadOnly: indicate current UDM pin level
+        pub type UD_DM_PIN__UH_DM_PIN_R = crate::BitReader<bool>;
+        ///Field `UD_DP_PIN__UH_DP_PIN` reader - ReadOnly: indicate current UDP pin level
+        pub type UD_DP_PIN__UH_DP_PIN_R = crate::BitReader<bool>;
+        ///Field `UD_PD_DIS__UH_PD_DIS` reader - disable USB UDP/UDM pulldown resistance: 0=enable pulldown, 1=disable
+        pub type UD_PD_DIS__UH_PD_DIS_R = crate::BitReader<bool>;
+        impl R {
+            ///Bit 0 - enable USB physical port I/O: 0=disable, 1=enable;enable USB port: 0=disable, 1=enable port, automatic disabled if USB device detached
+            #[inline(always)]
+            pub fn ud_port_en__uh_port_en(&self) -> UD_PORT_EN__UH_PORT_EN_R {
+                UD_PORT_EN__UH_PORT_EN_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 1 - general purpose bit;control USB bus reset: 0=normal, 1=force bus reset
+            #[inline(always)]
+            pub fn ud_gp_bit__uh_bus_reset(&self) -> UD_GP_BIT__UH_BUS_RESET_R {
+                UD_GP_BIT__UH_BUS_RESET_R::new(((self.bits >> 1) & 1) != 0)
+            }
+            ///Bit 2 - enable USB physical port low speed: 0=full speed, 1=low speed;enable USB port low speed: 0=full speed, 1=low speed
+            #[inline(always)]
+            pub fn ud_low_speed__uh_low_speed(&self) -> UD_LOW_SPEED__UH_LOW_SPEED_R {
+                UD_LOW_SPEED__UH_LOW_SPEED_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 4 - ReadOnly: indicate current UDM pin level
+            #[inline(always)]
+            pub fn ud_dm_pin__uh_dm_pin(&self) -> UD_DM_PIN__UH_DM_PIN_R {
+                UD_DM_PIN__UH_DM_PIN_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 5 - ReadOnly: indicate current UDP pin level
+            #[inline(always)]
+            pub fn ud_dp_pin__uh_dp_pin(&self) -> UD_DP_PIN__UH_DP_PIN_R {
+                UD_DP_PIN__UH_DP_PIN_R::new(((self.bits >> 5) & 1) != 0)
+            }
+            ///Bit 7 - disable USB UDP/UDM pulldown resistance: 0=enable pulldown, 1=disable
+            #[inline(always)]
+            pub fn ud_pd_dis__uh_pd_dis(&self) -> UD_PD_DIS__UH_PD_DIS_R {
+                UD_PD_DIS__UH_PD_DIS_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 0 - enable USB physical port I/O: 0=disable, 1=enable;enable USB port: 0=disable, 1=enable port, automatic disabled if USB device detached
+            #[inline(always)]
+            #[must_use]
+            pub fn ud_port_en__uh_port_en(&mut self) -> UD_PORT_EN__UH_PORT_EN_W<0> {
+                UD_PORT_EN__UH_PORT_EN_W::new(self)
+            }
+            ///Bit 1 - general purpose bit;control USB bus reset: 0=normal, 1=force bus reset
+            #[inline(always)]
+            #[must_use]
+            pub fn ud_gp_bit__uh_bus_reset(&mut self) -> UD_GP_BIT__UH_BUS_RESET_W<1> {
+                UD_GP_BIT__UH_BUS_RESET_W::new(self)
+            }
+            ///Bit 2 - enable USB physical port low speed: 0=full speed, 1=low speed;enable USB port low speed: 0=full speed, 1=low speed
+            #[inline(always)]
+            #[must_use]
+            pub fn ud_low_speed__uh_low_speed(&mut self) -> UD_LOW_SPEED__UH_LOW_SPEED_W<2> {
+                UD_LOW_SPEED__UH_LOW_SPEED_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB device physical prot control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [udev_ctrl__uhost_ctrl](index.html) module
+        pub struct UDEV_CTRL__UHOST_CTRL_SPEC;
+        impl crate::RegisterSpec for UDEV_CTRL__UHOST_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [udev_ctrl__uhost_ctrl::R](R) reader structure
+        impl crate::Readable for UDEV_CTRL__UHOST_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [udev_ctrl__uhost_ctrl::W](W) writer structure
+        impl crate::Writable for UDEV_CTRL__UHOST_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UDEV_CTRL__UHOST_CTRL to value 0
+        impl crate::Resettable for UDEV_CTRL__UHOST_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_INT_EN (rw) register accessor: an alias for `Reg<USB_INT_EN_SPEC>`
+    pub type USB_INT_EN = crate::Reg<usb_int_en::USB_INT_EN_SPEC>;
+    ///USB interrupt enable
+    pub mod usb_int_en {
+        ///Register `USB_INT_EN` reader
+        pub struct R(crate::R<USB_INT_EN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_INT_EN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_INT_EN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_INT_EN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `USB_INT_EN` writer
+        pub struct W(crate::W<USB_INT_EN_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<USB_INT_EN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<USB_INT_EN_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<USB_INT_EN_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UIE_BUS_RST__UIE_DETECT` reader - enable interrupt for USB bus reset event for USB device mode;enable interrupt for USB device detected event for USB host mode
+        pub type UIE_BUS_RST__UIE_DETECT_R = crate::BitReader<bool>;
+        ///Field `UIE_BUS_RST__UIE_DETECT` writer - enable interrupt for USB bus reset event for USB device mode;enable interrupt for USB device detected event for USB host mode
+        pub type UIE_BUS_RST__UIE_DETECT_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_TRANSFER` reader - enable interrupt for USB transfer completion
+        pub type UIE_TRANSFER_R = crate::BitReader<bool>;
+        ///Field `UIE_TRANSFER` writer - enable interrupt for USB transfer completion
+        pub type UIE_TRANSFER_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_SUSPEND` reader - enable interrupt for USB suspend or resume event
+        pub type UIE_SUSPEND_R = crate::BitReader<bool>;
+        ///Field `UIE_SUSPEND` writer - enable interrupt for USB suspend or resume event
+        pub type UIE_SUSPEND_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_HST_SOF` reader - enable interrupt for host SOF timer action for USB host mode
+        pub type UIE_HST_SOF_R = crate::BitReader<bool>;
+        ///Field `UIE_HST_SOF` writer - enable interrupt for host SOF timer action for USB host mode
+        pub type UIE_HST_SOF_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_FIFO_OV` reader - enable interrupt for FIFO overflow
+        pub type UIE_FIFO_OV_R = crate::BitReader<bool>;
+        ///Field `UIE_FIFO_OV` writer - enable interrupt for FIFO overflow
+        pub type UIE_FIFO_OV_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_DEV_NAK` reader - enable interrupt for NAK responded for USB device mode
+        pub type UIE_DEV_NAK_R = crate::BitReader<bool>;
+        ///Field `UIE_DEV_NAK` writer - enable interrupt for NAK responded for USB device mode
+        pub type UIE_DEV_NAK_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        ///Field `UIE_DEV_SOF` reader - enable interrupt for SOF received for USB device mode
+        pub type UIE_DEV_SOF_R = crate::BitReader<bool>;
+        ///Field `UIE_DEV_SOF` writer - enable interrupt for SOF received for USB device mode
+        pub type UIE_DEV_SOF_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_EN_SPEC, bool, O>;
+        impl R {
+            ///Bit 0 - enable interrupt for USB bus reset event for USB device mode;enable interrupt for USB device detected event for USB host mode
+            #[inline(always)]
+            pub fn uie_bus_rst__uie_detect(&self) -> UIE_BUS_RST__UIE_DETECT_R {
+                UIE_BUS_RST__UIE_DETECT_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 1 - enable interrupt for USB transfer completion
+            #[inline(always)]
+            pub fn uie_transfer(&self) -> UIE_TRANSFER_R {
+                UIE_TRANSFER_R::new(((self.bits >> 1) & 1) != 0)
+            }
+            ///Bit 2 - enable interrupt for USB suspend or resume event
+            #[inline(always)]
+            pub fn uie_suspend(&self) -> UIE_SUSPEND_R {
+                UIE_SUSPEND_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - enable interrupt for host SOF timer action for USB host mode
+            #[inline(always)]
+            pub fn uie_hst_sof(&self) -> UIE_HST_SOF_R {
+                UIE_HST_SOF_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bit 4 - enable interrupt for FIFO overflow
+            #[inline(always)]
+            pub fn uie_fifo_ov(&self) -> UIE_FIFO_OV_R {
+                UIE_FIFO_OV_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - enable interrupt for NAK responded for USB device mode
+            #[inline(always)]
+            pub fn uie_dev_nak(&self) -> UIE_DEV_NAK_R {
+                UIE_DEV_NAK_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - enable interrupt for SOF received for USB device mode
+            #[inline(always)]
+            pub fn uie_dev_sof(&self) -> UIE_DEV_SOF_R {
+                UIE_DEV_SOF_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 0 - enable interrupt for USB bus reset event for USB device mode;enable interrupt for USB device detected event for USB host mode
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_bus_rst__uie_detect(&mut self) -> UIE_BUS_RST__UIE_DETECT_W<0> {
+                UIE_BUS_RST__UIE_DETECT_W::new(self)
+            }
+            ///Bit 1 - enable interrupt for USB transfer completion
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_transfer(&mut self) -> UIE_TRANSFER_W<1> {
+                UIE_TRANSFER_W::new(self)
+            }
+            ///Bit 2 - enable interrupt for USB suspend or resume event
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_suspend(&mut self) -> UIE_SUSPEND_W<2> {
+                UIE_SUSPEND_W::new(self)
+            }
+            ///Bit 3 - enable interrupt for host SOF timer action for USB host mode
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_hst_sof(&mut self) -> UIE_HST_SOF_W<3> {
+                UIE_HST_SOF_W::new(self)
+            }
+            ///Bit 4 - enable interrupt for FIFO overflow
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_fifo_ov(&mut self) -> UIE_FIFO_OV_W<4> {
+                UIE_FIFO_OV_W::new(self)
+            }
+            ///Bit 6 - enable interrupt for NAK responded for USB device mode
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_dev_nak(&mut self) -> UIE_DEV_NAK_W<6> {
+                UIE_DEV_NAK_W::new(self)
+            }
+            ///Bit 7 - enable interrupt for SOF received for USB device mode
+            #[inline(always)]
+            #[must_use]
+            pub fn uie_dev_sof(&mut self) -> UIE_DEV_SOF_W<7> {
+                UIE_DEV_SOF_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB interrupt enable
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_int_en](index.html) module
+        pub struct USB_INT_EN_SPEC;
+        impl crate::RegisterSpec for USB_INT_EN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_int_en::R](R) reader structure
+        impl crate::Readable for USB_INT_EN_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [usb_int_en::W](W) writer structure
+        impl crate::Writable for USB_INT_EN_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets USB_INT_EN to value 0
+        impl crate::Resettable for USB_INT_EN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_DEV_AD (rw) register accessor: an alias for `Reg<USB_DEV_AD_SPEC>`
+    pub type USB_DEV_AD = crate::Reg<usb_dev_ad::USB_DEV_AD_SPEC>;
+    ///USB device address
+    pub mod usb_dev_ad {
+        ///Register `USB_DEV_AD` reader
+        pub struct R(crate::R<USB_DEV_AD_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_DEV_AD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_DEV_AD_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_DEV_AD_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `USB_DEV_AD` writer
+        pub struct W(crate::W<USB_DEV_AD_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<USB_DEV_AD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<USB_DEV_AD_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<USB_DEV_AD_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_USB_ADDR` reader - bit mask for USB device address
+        pub type MASK_USB_ADDR_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_USB_ADDR` writer - bit mask for USB device address
+        pub type MASK_USB_ADDR_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, USB_DEV_AD_SPEC, u8, u8, 7, O>;
+        ///Field `UDA_GP_BIT` reader - general purpose bit
+        pub type UDA_GP_BIT_R = crate::BitReader<bool>;
+        ///Field `UDA_GP_BIT` writer - general purpose bit
+        pub type UDA_GP_BIT_W<'a, const O: u8> = crate::BitWriter<'a, u8, USB_DEV_AD_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:6 - bit mask for USB device address
+            #[inline(always)]
+            pub fn mask_usb_addr(&self) -> MASK_USB_ADDR_R {
+                MASK_USB_ADDR_R::new(self.bits & 0x7f)
+            }
+            ///Bit 7 - general purpose bit
+            #[inline(always)]
+            pub fn uda_gp_bit(&self) -> UDA_GP_BIT_R {
+                UDA_GP_BIT_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:6 - bit mask for USB device address
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_usb_addr(&mut self) -> MASK_USB_ADDR_W<0> {
+                MASK_USB_ADDR_W::new(self)
+            }
+            ///Bit 7 - general purpose bit
+            #[inline(always)]
+            #[must_use]
+            pub fn uda_gp_bit(&mut self) -> UDA_GP_BIT_W<7> {
+                UDA_GP_BIT_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB device address
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_dev_ad](index.html) module
+        pub struct USB_DEV_AD_SPEC;
+        impl crate::RegisterSpec for USB_DEV_AD_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_dev_ad::R](R) reader structure
+        impl crate::Readable for USB_DEV_AD_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [usb_dev_ad::W](W) writer structure
+        impl crate::Writable for USB_DEV_AD_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets USB_DEV_AD to value 0
+        impl crate::Resettable for USB_DEV_AD_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_MIS_ST (r) register accessor: an alias for `Reg<USB_MIS_ST_SPEC>`
+    pub type USB_MIS_ST = crate::Reg<usb_mis_st::USB_MIS_ST_SPEC>;
+    ///USB miscellaneous status
+    pub mod usb_mis_st {
+        ///Register `USB_MIS_ST` reader
+        pub struct R(crate::R<USB_MIS_ST_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_MIS_ST_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_MIS_ST_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_MIS_ST_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Field `UMS_DEV_ATTACH` reader - RO, indicate device attached status on USB host
+        pub type UMS_DEV_ATTACH_R = crate::BitReader<bool>;
+        ///Field `UMS_DM_LEVEL` reader - RO, indicate UDM level saved at device attached to USB host
+        pub type UMS_DM_LEVEL_R = crate::BitReader<bool>;
+        ///Field `UMS_SUSPEND` reader - RO, indicate USB suspend status
+        pub type UMS_SUSPEND_R = crate::BitReader<bool>;
+        ///Field `UMS_BUS_RESET` reader - RO, indicate USB bus reset status
+        pub type UMS_BUS_RESET_R = crate::BitReader<bool>;
+        ///Field `UMS_R_FIFO_RDY` reader - RO, indicate USB receiving FIFO ready status (not empty)
+        pub type UMS_R_FIFO_RDY_R = crate::BitReader<bool>;
+        ///Field `UMS_SIE_FREE` reader - RO, indicate USB SIE free status
+        pub type UMS_SIE_FREE_R = crate::BitReader<bool>;
+        ///Field `UMS_SOF_ACT` reader - RO, indicate host SOF timer action status for USB host
+        pub type UMS_SOF_ACT_R = crate::BitReader<bool>;
+        ///Field `UMS_SOF_PRES` reader - RO, indicate host SOF timer presage status
+        pub type UMS_SOF_PRES_R = crate::BitReader<bool>;
+        impl R {
+            ///Bit 0 - RO, indicate device attached status on USB host
+            #[inline(always)]
+            pub fn ums_dev_attach(&self) -> UMS_DEV_ATTACH_R {
+                UMS_DEV_ATTACH_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 1 - RO, indicate UDM level saved at device attached to USB host
+            #[inline(always)]
+            pub fn ums_dm_level(&self) -> UMS_DM_LEVEL_R {
+                UMS_DM_LEVEL_R::new(((self.bits >> 1) & 1) != 0)
+            }
+            ///Bit 2 - RO, indicate USB suspend status
+            #[inline(always)]
+            pub fn ums_suspend(&self) -> UMS_SUSPEND_R {
+                UMS_SUSPEND_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - RO, indicate USB bus reset status
+            #[inline(always)]
+            pub fn ums_bus_reset(&self) -> UMS_BUS_RESET_R {
+                UMS_BUS_RESET_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bit 4 - RO, indicate USB receiving FIFO ready status (not empty)
+            #[inline(always)]
+            pub fn ums_r_fifo_rdy(&self) -> UMS_R_FIFO_RDY_R {
+                UMS_R_FIFO_RDY_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 5 - RO, indicate USB SIE free status
+            #[inline(always)]
+            pub fn ums_sie_free(&self) -> UMS_SIE_FREE_R {
+                UMS_SIE_FREE_R::new(((self.bits >> 5) & 1) != 0)
+            }
+            ///Bit 6 - RO, indicate host SOF timer action status for USB host
+            #[inline(always)]
+            pub fn ums_sof_act(&self) -> UMS_SOF_ACT_R {
+                UMS_SOF_ACT_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - RO, indicate host SOF timer presage status
+            #[inline(always)]
+            pub fn ums_sof_pres(&self) -> UMS_SOF_PRES_R {
+                UMS_SOF_PRES_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        ///USB miscellaneous status
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_mis_st](index.html) module
+        pub struct USB_MIS_ST_SPEC;
+        impl crate::RegisterSpec for USB_MIS_ST_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_mis_st::R](R) reader structure
+        impl crate::Readable for USB_MIS_ST_SPEC {
+            type Reader = R;
+        }
+        ///`reset()` method sets USB_MIS_ST to value 0
+        impl crate::Resettable for USB_MIS_ST_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_INT_FG (rw) register accessor: an alias for `Reg<USB_INT_FG_SPEC>`
+    pub type USB_INT_FG = crate::Reg<usb_int_fg::USB_INT_FG_SPEC>;
+    ///USB interrupt flag
+    pub mod usb_int_fg {
+        ///Register `USB_INT_FG` reader
+        pub struct R(crate::R<USB_INT_FG_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_INT_FG_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_INT_FG_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_INT_FG_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `USB_INT_FG` writer
+        pub struct W(crate::W<USB_INT_FG_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<USB_INT_FG_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<USB_INT_FG_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<USB_INT_FG_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UIF_BUS_RST__UIF_DETECT` reader - bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear;device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
+        pub type UIF_BUS_RST__UIF_DETECT_R = crate::BitReader<bool>;
+        ///Field `UIF_BUS_RST__UIF_DETECT` writer - bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear;device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
+        pub type UIF_BUS_RST__UIF_DETECT_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_FG_SPEC, bool, O>;
+        ///Field `UIF_TRANSFER` reader - USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
+        pub type UIF_TRANSFER_R = crate::BitReader<bool>;
+        ///Field `UIF_TRANSFER` writer - USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
+        pub type UIF_TRANSFER_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_FG_SPEC, bool, O>;
+        ///Field `UIF_SUSPEND` reader - USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
+        pub type UIF_SUSPEND_R = crate::BitReader<bool>;
+        ///Field `UIF_SUSPEND` writer - USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
+        pub type UIF_SUSPEND_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_FG_SPEC, bool, O>;
+        ///Field `UIF_HST_SOF` reader - host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
+        pub type UIF_HST_SOF_R = crate::BitReader<bool>;
+        ///Field `UIF_HST_SOF` writer - host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
+        pub type UIF_HST_SOF_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_FG_SPEC, bool, O>;
+        ///Field `UIF_FIFO_OV` reader - FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
+        pub type UIF_FIFO_OV_R = crate::BitReader<bool>;
+        ///Field `UIF_FIFO_OV` writer - FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
+        pub type UIF_FIFO_OV_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_INT_FG_SPEC, bool, O>;
+        ///Field `U_SIE_FREE` reader - RO, indicate USB SIE free status
+        pub type U_SIE_FREE_R = crate::BitReader<bool>;
+        ///Field `U_TOG_OK` reader - RO, indicate current USB transfer toggle is OK
+        pub type U_TOG_OK_R = crate::BitReader<bool>;
+        ///Field `U_IS_NAK` reader - RO, indicate current USB transfer is NAK received
+        pub type U_IS_NAK_R = crate::BitReader<bool>;
+        impl R {
+            ///Bit 0 - bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear;device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            pub fn uif_bus_rst__uif_detect(&self) -> UIF_BUS_RST__UIF_DETECT_R {
+                UIF_BUS_RST__UIF_DETECT_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 1 - USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            pub fn uif_transfer(&self) -> UIF_TRANSFER_R {
+                UIF_TRANSFER_R::new(((self.bits >> 1) & 1) != 0)
+            }
+            ///Bit 2 - USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            pub fn uif_suspend(&self) -> UIF_SUSPEND_R {
+                UIF_SUSPEND_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            pub fn uif_hst_sof(&self) -> UIF_HST_SOF_R {
+                UIF_HST_SOF_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bit 4 - FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            pub fn uif_fifo_ov(&self) -> UIF_FIFO_OV_R {
+                UIF_FIFO_OV_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 5 - RO, indicate USB SIE free status
+            #[inline(always)]
+            pub fn u_sie_free(&self) -> U_SIE_FREE_R {
+                U_SIE_FREE_R::new(((self.bits >> 5) & 1) != 0)
+            }
+            ///Bit 6 - RO, indicate current USB transfer toggle is OK
+            #[inline(always)]
+            pub fn u_tog_ok(&self) -> U_TOG_OK_R {
+                U_TOG_OK_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - RO, indicate current USB transfer is NAK received
+            #[inline(always)]
+            pub fn u_is_nak(&self) -> U_IS_NAK_R {
+                U_IS_NAK_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 0 - bus reset event interrupt flag for USB device mode, direct bit address clear or write 1 to clear;device detected event interrupt flag for USB host mode, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uif_bus_rst__uif_detect(&mut self) -> UIF_BUS_RST__UIF_DETECT_W<0> {
+                UIF_BUS_RST__UIF_DETECT_W::new(self)
+            }
+            ///Bit 1 - USB transfer completion interrupt flag, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uif_transfer(&mut self) -> UIF_TRANSFER_W<1> {
+                UIF_TRANSFER_W::new(self)
+            }
+            ///Bit 2 - USB suspend or resume event interrupt flag, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uif_suspend(&mut self) -> UIF_SUSPEND_W<2> {
+                UIF_SUSPEND_W::new(self)
+            }
+            ///Bit 3 - host SOF timer interrupt flag for USB host, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uif_hst_sof(&mut self) -> UIF_HST_SOF_W<3> {
+                UIF_HST_SOF_W::new(self)
+            }
+            ///Bit 4 - FIFO overflow interrupt flag for USB, direct bit address clear or write 1 to clear
+            #[inline(always)]
+            #[must_use]
+            pub fn uif_fifo_ov(&mut self) -> UIF_FIFO_OV_W<4> {
+                UIF_FIFO_OV_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB interrupt flag
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_int_fg](index.html) module
+        pub struct USB_INT_FG_SPEC;
+        impl crate::RegisterSpec for USB_INT_FG_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_int_fg::R](R) reader structure
+        impl crate::Readable for USB_INT_FG_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [usb_int_fg::W](W) writer structure
+        impl crate::Writable for USB_INT_FG_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets USB_INT_FG to value 0
+        impl crate::Resettable for USB_INT_FG_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_INT_ST (r) register accessor: an alias for `Reg<USB_INT_ST_SPEC>`
+    pub type USB_INT_ST = crate::Reg<usb_int_st::USB_INT_ST_SPEC>;
+    ///USB interrupt status
+    pub mod usb_int_st {
+        ///Register `USB_INT_ST` reader
+        pub struct R(crate::R<USB_INT_ST_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_INT_ST_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_INT_ST_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_INT_ST_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Field `MASK_UIS_H_RES__MASK_UIS_ENDP` reader - RO, bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received;RO, bit mask of current transfer endpoint number for USB device mode
+        pub type MASK_UIS_H_RES__MASK_UIS_ENDP_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UIS_TOKEN` reader - RO, bit mask of current token PID code received for USB device mode
+        pub type MASK_UIS_TOKEN_R = crate::FieldReader<u8, u8>;
+        ///Field `UIS_TOG_OK` reader - RO, indicate current USB transfer toggle is OK
+        pub type UIS_TOG_OK_R = crate::BitReader<bool>;
+        ///Field `UIS_IS_NAK` reader - RO, indicate current USB transfer is NAK received for USB device mode
+        pub type UIS_IS_NAK_R = crate::BitReader<bool>;
+        impl R {
+            ///Bits 0:3 - RO, bit mask of current transfer handshake response for USB host mode: 0000=no response, time out from device, others=handshake response PID received;RO, bit mask of current transfer endpoint number for USB device mode
+            #[inline(always)]
+            pub fn mask_uis_h_res__mask_uis_endp(&self) -> MASK_UIS_H_RES__MASK_UIS_ENDP_R {
+                MASK_UIS_H_RES__MASK_UIS_ENDP_R::new(self.bits & 0x0f)
+            }
+            ///Bits 4:5 - RO, bit mask of current token PID code received for USB device mode
+            #[inline(always)]
+            pub fn mask_uis_token(&self) -> MASK_UIS_TOKEN_R {
+                MASK_UIS_TOKEN_R::new((self.bits >> 4) & 3)
+            }
+            ///Bit 6 - RO, indicate current USB transfer toggle is OK
+            #[inline(always)]
+            pub fn uis_tog_ok(&self) -> UIS_TOG_OK_R {
+                UIS_TOG_OK_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - RO, indicate current USB transfer is NAK received for USB device mode
+            #[inline(always)]
+            pub fn uis_is_nak(&self) -> UIS_IS_NAK_R {
+                UIS_IS_NAK_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        ///USB interrupt status
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_int_st](index.html) module
+        pub struct USB_INT_ST_SPEC;
+        impl crate::RegisterSpec for USB_INT_ST_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_int_st::R](R) reader structure
+        impl crate::Readable for USB_INT_ST_SPEC {
+            type Reader = R;
+        }
+        ///`reset()` method sets USB_INT_ST to value 0
+        impl crate::Resettable for USB_INT_ST_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_RX_LEN (r) register accessor: an alias for `Reg<USB_RX_LEN_SPEC>`
+    pub type USB_RX_LEN = crate::Reg<usb_rx_len::USB_RX_LEN_SPEC>;
+    ///USB receiving length
+    pub mod usb_rx_len {
+        ///Register `USB_RX_LEN` reader
+        pub struct R(crate::R<USB_RX_LEN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_RX_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_RX_LEN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_RX_LEN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///USB receiving length
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_rx_len](index.html) module
+        pub struct USB_RX_LEN_SPEC;
+        impl crate::RegisterSpec for USB_RX_LEN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_rx_len::R](R) reader structure
+        impl crate::Readable for USB_RX_LEN_SPEC {
+            type Reader = R;
+        }
+        ///`reset()` method sets USB_RX_LEN to value 0
+        impl crate::Resettable for USB_RX_LEN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP4_1_MOD (rw) register accessor: an alias for `Reg<UEP4_1_MOD_SPEC>`
+    pub type UEP4_1_MOD = crate::Reg<uep4_1_mod::UEP4_1_MOD_SPEC>;
+    ///endpoint 4/1 mode
+    pub mod uep4_1_mod {
+        ///Register `UEP4_1_MOD` reader
+        pub struct R(crate::R<UEP4_1_MOD_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP4_1_MOD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP4_1_MOD_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP4_1_MOD_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP4_1_MOD` writer
+        pub struct W(crate::W<UEP4_1_MOD_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP4_1_MOD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP4_1_MOD_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP4_1_MOD_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UEP4_TX_EN` reader - enable USB endpoint 4 transmittal (IN)
+        pub type UEP4_TX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP4_TX_EN` writer - enable USB endpoint 4 transmittal (IN)
+        pub type UEP4_TX_EN_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_1_MOD_SPEC, bool, O>;
+        ///Field `UEP4_RX_EN` reader - enable USB endpoint 4 receiving (OUT)
+        pub type UEP4_RX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP4_RX_EN` writer - enable USB endpoint 4 receiving (OUT)
+        pub type UEP4_RX_EN_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_1_MOD_SPEC, bool, O>;
+        ///Field `UEP1_BUF_MOD` reader - buffer mode of USB endpoint 1
+        pub type UEP1_BUF_MOD_R = crate::BitReader<bool>;
+        ///Field `UEP1_BUF_MOD` writer - buffer mode of USB endpoint 1
+        pub type UEP1_BUF_MOD_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP4_1_MOD_SPEC, bool, O>;
+        ///Field `UEP1_TX_EN` reader - enable USB endpoint 1 transmittal (IN)
+        pub type UEP1_TX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP1_TX_EN` writer - enable USB endpoint 1 transmittal (IN)
+        pub type UEP1_TX_EN_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_1_MOD_SPEC, bool, O>;
+        ///Field `UEP1_RX_EN` reader - enable USB endpoint 1 receiving (OUT)
+        pub type UEP1_RX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP1_RX_EN` writer - enable USB endpoint 1 receiving (OUT)
+        pub type UEP1_RX_EN_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_1_MOD_SPEC, bool, O>;
+        impl R {
+            ///Bit 2 - enable USB endpoint 4 transmittal (IN)
+            #[inline(always)]
+            pub fn uep4_tx_en(&self) -> UEP4_TX_EN_R {
+                UEP4_TX_EN_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - enable USB endpoint 4 receiving (OUT)
+            #[inline(always)]
+            pub fn uep4_rx_en(&self) -> UEP4_RX_EN_R {
+                UEP4_RX_EN_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bit 4 - buffer mode of USB endpoint 1
+            #[inline(always)]
+            pub fn uep1_buf_mod(&self) -> UEP1_BUF_MOD_R {
+                UEP1_BUF_MOD_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - enable USB endpoint 1 transmittal (IN)
+            #[inline(always)]
+            pub fn uep1_tx_en(&self) -> UEP1_TX_EN_R {
+                UEP1_TX_EN_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - enable USB endpoint 1 receiving (OUT)
+            #[inline(always)]
+            pub fn uep1_rx_en(&self) -> UEP1_RX_EN_R {
+                UEP1_RX_EN_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 2 - enable USB endpoint 4 transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep4_tx_en(&mut self) -> UEP4_TX_EN_W<2> {
+                UEP4_TX_EN_W::new(self)
+            }
+            ///Bit 3 - enable USB endpoint 4 receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep4_rx_en(&mut self) -> UEP4_RX_EN_W<3> {
+                UEP4_RX_EN_W::new(self)
+            }
+            ///Bit 4 - buffer mode of USB endpoint 1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep1_buf_mod(&mut self) -> UEP1_BUF_MOD_W<4> {
+                UEP1_BUF_MOD_W::new(self)
+            }
+            ///Bit 6 - enable USB endpoint 1 transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep1_tx_en(&mut self) -> UEP1_TX_EN_W<6> {
+                UEP1_TX_EN_W::new(self)
+            }
+            ///Bit 7 - enable USB endpoint 1 receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep1_rx_en(&mut self) -> UEP1_RX_EN_W<7> {
+                UEP1_RX_EN_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 4/1 mode
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep4_1_mod](index.html) module
+        pub struct UEP4_1_MOD_SPEC;
+        impl crate::RegisterSpec for UEP4_1_MOD_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep4_1_mod::R](R) reader structure
+        impl crate::Readable for UEP4_1_MOD_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep4_1_mod::W](W) writer structure
+        impl crate::Writable for UEP4_1_MOD_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP4_1_MOD to value 0
+        impl crate::Resettable for UEP4_1_MOD_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP2_3_MOD__UH_EP_MOD (rw) register accessor: an alias for `Reg<UEP2_3_MOD__UH_EP_MOD_SPEC>`
+    pub type UEP2_3_MOD__UH_EP_MOD =
+        crate::Reg<uep2_3_mod__uh_ep_mod::UEP2_3_MOD__UH_EP_MOD_SPEC>;
+    ///endpoint 2/3 mode;host endpoint mode
+    pub mod uep2_3_mod__uh_ep_mod {
+        ///Register `UEP2_3_MOD__UH_EP_MOD` reader
+        pub struct R(crate::R<UEP2_3_MOD__UH_EP_MOD_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP2_3_MOD__UH_EP_MOD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP2_3_MOD__UH_EP_MOD_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP2_3_MOD__UH_EP_MOD_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP2_3_MOD__UH_EP_MOD` writer
+        pub struct W(crate::W<UEP2_3_MOD__UH_EP_MOD_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP2_3_MOD__UH_EP_MOD_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP2_3_MOD__UH_EP_MOD_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP2_3_MOD__UH_EP_MOD_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UEP2_BUF_MOD__UH_EP_RBUF_MOD` reader - buffer mode of USB endpoint 2;buffer mode of USB host IN endpoint
+        pub type UEP2_BUF_MOD__UH_EP_RBUF_MOD_R = crate::BitReader<bool>;
+        ///Field `UEP2_BUF_MOD__UH_EP_RBUF_MOD` writer - buffer mode of USB endpoint 2;buffer mode of USB host IN endpoint
+        pub type UEP2_BUF_MOD__UH_EP_RBUF_MOD_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        ///Field `UEP2_TX_EN` reader - enable USB endpoint 2 transmittal (IN)
+        pub type UEP2_TX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP2_TX_EN` writer - enable USB endpoint 2 transmittal (IN)
+        pub type UEP2_TX_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        ///Field `UEP2_RX_EN__UH_EP_RX_EN` reader - enable USB endpoint 2 receiving (OUT);enable USB host IN endpoint receiving
+        pub type UEP2_RX_EN__UH_EP_RX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP2_RX_EN__UH_EP_RX_EN` writer - enable USB endpoint 2 receiving (OUT);enable USB host IN endpoint receiving
+        pub type UEP2_RX_EN__UH_EP_RX_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        ///Field `UEP3_BUF_MOD__UH_EP_TBUF_MOD` reader - buffer mode of USB endpoint 3;buffer mode of USB host OUT endpoint
+        pub type UEP3_BUF_MOD__UH_EP_TBUF_MOD_R = crate::BitReader<bool>;
+        ///Field `UEP3_BUF_MOD__UH_EP_TBUF_MOD` writer - buffer mode of USB endpoint 3;buffer mode of USB host OUT endpoint
+        pub type UEP3_BUF_MOD__UH_EP_TBUF_MOD_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        ///Field `UEP3_TX_EN__UH_EP_TX_EN` reader - enable USB endpoint 3 transmittal (IN);enable USB host OUT endpoint transmittal
+        pub type UEP3_TX_EN__UH_EP_TX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP3_TX_EN__UH_EP_TX_EN` writer - enable USB endpoint 3 transmittal (IN);enable USB host OUT endpoint transmittal
+        pub type UEP3_TX_EN__UH_EP_TX_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        ///Field `UEP3_RX_EN` reader - enable USB endpoint 3 receiving (OUT)
+        pub type UEP3_RX_EN_R = crate::BitReader<bool>;
+        ///Field `UEP3_RX_EN` writer - enable USB endpoint 3 receiving (OUT)
+        pub type UEP3_RX_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_3_MOD__UH_EP_MOD_SPEC, bool, O>;
+        impl R {
+            ///Bit 0 - buffer mode of USB endpoint 2;buffer mode of USB host IN endpoint
+            #[inline(always)]
+            pub fn uep2_buf_mod__uh_ep_rbuf_mod(&self) -> UEP2_BUF_MOD__UH_EP_RBUF_MOD_R {
+                UEP2_BUF_MOD__UH_EP_RBUF_MOD_R::new((self.bits & 1) != 0)
+            }
+            ///Bit 2 - enable USB endpoint 2 transmittal (IN)
+            #[inline(always)]
+            pub fn uep2_tx_en(&self) -> UEP2_TX_EN_R {
+                UEP2_TX_EN_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - enable USB endpoint 2 receiving (OUT);enable USB host IN endpoint receiving
+            #[inline(always)]
+            pub fn uep2_rx_en__uh_ep_rx_en(&self) -> UEP2_RX_EN__UH_EP_RX_EN_R {
+                UEP2_RX_EN__UH_EP_RX_EN_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bit 4 - buffer mode of USB endpoint 3;buffer mode of USB host OUT endpoint
+            #[inline(always)]
+            pub fn uep3_buf_mod__uh_ep_tbuf_mod(&self) -> UEP3_BUF_MOD__UH_EP_TBUF_MOD_R {
+                UEP3_BUF_MOD__UH_EP_TBUF_MOD_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - enable USB endpoint 3 transmittal (IN);enable USB host OUT endpoint transmittal
+            #[inline(always)]
+            pub fn uep3_tx_en__uh_ep_tx_en(&self) -> UEP3_TX_EN__UH_EP_TX_EN_R {
+                UEP3_TX_EN__UH_EP_TX_EN_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - enable USB endpoint 3 receiving (OUT)
+            #[inline(always)]
+            pub fn uep3_rx_en(&self) -> UEP3_RX_EN_R {
+                UEP3_RX_EN_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bit 0 - buffer mode of USB endpoint 2;buffer mode of USB host IN endpoint
+            #[inline(always)]
+            #[must_use]
+            pub fn uep2_buf_mod__uh_ep_rbuf_mod(
+                &mut self,
+            ) -> UEP2_BUF_MOD__UH_EP_RBUF_MOD_W<0> {
+                UEP2_BUF_MOD__UH_EP_RBUF_MOD_W::new(self)
+            }
+            ///Bit 2 - enable USB endpoint 2 transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep2_tx_en(&mut self) -> UEP2_TX_EN_W<2> {
+                UEP2_TX_EN_W::new(self)
+            }
+            ///Bit 3 - enable USB endpoint 2 receiving (OUT);enable USB host IN endpoint receiving
+            #[inline(always)]
+            #[must_use]
+            pub fn uep2_rx_en__uh_ep_rx_en(&mut self) -> UEP2_RX_EN__UH_EP_RX_EN_W<3> {
+                UEP2_RX_EN__UH_EP_RX_EN_W::new(self)
+            }
+            ///Bit 4 - buffer mode of USB endpoint 3;buffer mode of USB host OUT endpoint
+            #[inline(always)]
+            #[must_use]
+            pub fn uep3_buf_mod__uh_ep_tbuf_mod(
+                &mut self,
+            ) -> UEP3_BUF_MOD__UH_EP_TBUF_MOD_W<4> {
+                UEP3_BUF_MOD__UH_EP_TBUF_MOD_W::new(self)
+            }
+            ///Bit 6 - enable USB endpoint 3 transmittal (IN);enable USB host OUT endpoint transmittal
+            #[inline(always)]
+            #[must_use]
+            pub fn uep3_tx_en__uh_ep_tx_en(&mut self) -> UEP3_TX_EN__UH_EP_TX_EN_W<6> {
+                UEP3_TX_EN__UH_EP_TX_EN_W::new(self)
+            }
+            ///Bit 7 - enable USB endpoint 3 receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn uep3_rx_en(&mut self) -> UEP3_RX_EN_W<7> {
+                UEP3_RX_EN_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 2/3 mode;host endpoint mode
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep2_3_mod__uh_ep_mod](index.html) module
+        pub struct UEP2_3_MOD__UH_EP_MOD_SPEC;
+        impl crate::RegisterSpec for UEP2_3_MOD__UH_EP_MOD_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep2_3_mod__uh_ep_mod::R](R) reader structure
+        impl crate::Readable for UEP2_3_MOD__UH_EP_MOD_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep2_3_mod__uh_ep_mod::W](W) writer structure
+        impl crate::Writable for UEP2_3_MOD__UH_EP_MOD_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP2_3_MOD__UH_EP_MOD to value 0
+        impl crate::Resettable for UEP2_3_MOD__UH_EP_MOD_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP0_DMA (rw) register accessor: an alias for `Reg<UEP0_DMA_SPEC>`
+    pub type UEP0_DMA = crate::Reg<uep0_dma::UEP0_DMA_SPEC>;
+    ///endpoint 0 DMA buffer address
+    pub mod uep0_dma {
+        ///Register `UEP0_DMA` reader
+        pub struct R(crate::R<UEP0_DMA_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP0_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP0_DMA_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP0_DMA_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP0_DMA` writer
+        pub struct W(crate::W<UEP0_DMA_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP0_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP0_DMA_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP0_DMA_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u16) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 0 DMA buffer address
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep0_dma](index.html) module
+        pub struct UEP0_DMA_SPEC;
+        impl crate::RegisterSpec for UEP0_DMA_SPEC {
+            type Ux = u16;
+        }
+        ///`read()` method returns [uep0_dma::R](R) reader structure
+        impl crate::Readable for UEP0_DMA_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep0_dma::W](W) writer structure
+        impl crate::Writable for UEP0_DMA_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP0_DMA to value 0
+        impl crate::Resettable for UEP0_DMA_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP1_DMA (rw) register accessor: an alias for `Reg<UEP1_DMA_SPEC>`
+    pub type UEP1_DMA = crate::Reg<uep1_dma::UEP1_DMA_SPEC>;
+    ///endpoint 1 DMA buffer address
+    pub mod uep1_dma {
+        ///Register `UEP1_DMA` reader
+        pub struct R(crate::R<UEP1_DMA_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP1_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP1_DMA_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP1_DMA_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP1_DMA` writer
+        pub struct W(crate::W<UEP1_DMA_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP1_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP1_DMA_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP1_DMA_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u16) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 1 DMA buffer address
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep1_dma](index.html) module
+        pub struct UEP1_DMA_SPEC;
+        impl crate::RegisterSpec for UEP1_DMA_SPEC {
+            type Ux = u16;
+        }
+        ///`read()` method returns [uep1_dma::R](R) reader structure
+        impl crate::Readable for UEP1_DMA_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep1_dma::W](W) writer structure
+        impl crate::Writable for UEP1_DMA_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP1_DMA to value 0
+        impl crate::Resettable for UEP1_DMA_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP2_DMA__UH_RX_DMA (rw) register accessor: an alias for `Reg<UEP2_DMA__UH_RX_DMA_SPEC>`
+    pub type UEP2_DMA__UH_RX_DMA =
+        crate::Reg<uep2_dma__uh_rx_dma::UEP2_DMA__UH_RX_DMA_SPEC>;
+    ///endpoint 2 DMA buffer address;host rx endpoint buffer high address
+    pub mod uep2_dma__uh_rx_dma {
+        ///Register `UEP2_DMA__UH_RX_DMA` reader
+        pub struct R(crate::R<UEP2_DMA__UH_RX_DMA_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP2_DMA__UH_RX_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP2_DMA__UH_RX_DMA_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP2_DMA__UH_RX_DMA_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP2_DMA__UH_RX_DMA` writer
+        pub struct W(crate::W<UEP2_DMA__UH_RX_DMA_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP2_DMA__UH_RX_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP2_DMA__UH_RX_DMA_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP2_DMA__UH_RX_DMA_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u16) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 2 DMA buffer address;host rx endpoint buffer high address
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep2_dma__uh_rx_dma](index.html) module
+        pub struct UEP2_DMA__UH_RX_DMA_SPEC;
+        impl crate::RegisterSpec for UEP2_DMA__UH_RX_DMA_SPEC {
+            type Ux = u16;
+        }
+        ///`read()` method returns [uep2_dma__uh_rx_dma::R](R) reader structure
+        impl crate::Readable for UEP2_DMA__UH_RX_DMA_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep2_dma__uh_rx_dma::W](W) writer structure
+        impl crate::Writable for UEP2_DMA__UH_RX_DMA_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP2_DMA__UH_RX_DMA to value 0
+        impl crate::Resettable for UEP2_DMA__UH_RX_DMA_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP3_DMA__UH_TX_DMA (rw) register accessor: an alias for `Reg<UEP3_DMA__UH_TX_DMA_SPEC>`
+    pub type UEP3_DMA__UH_TX_DMA =
+        crate::Reg<uep3_dma__uh_tx_dma::UEP3_DMA__UH_TX_DMA_SPEC>;
+    ///endpoint 3 DMA buffer address;host tx endpoint buffer high address
+    pub mod uep3_dma__uh_tx_dma {
+        ///Register `UEP3_DMA__UH_TX_DMA` reader
+        pub struct R(crate::R<UEP3_DMA__UH_TX_DMA_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP3_DMA__UH_TX_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP3_DMA__UH_TX_DMA_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP3_DMA__UH_TX_DMA_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP3_DMA__UH_TX_DMA` writer
+        pub struct W(crate::W<UEP3_DMA__UH_TX_DMA_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP3_DMA__UH_TX_DMA_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP3_DMA__UH_TX_DMA_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP3_DMA__UH_TX_DMA_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u16) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 3 DMA buffer address;host tx endpoint buffer high address
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep3_dma__uh_tx_dma](index.html) module
+        pub struct UEP3_DMA__UH_TX_DMA_SPEC;
+        impl crate::RegisterSpec for UEP3_DMA__UH_TX_DMA_SPEC {
+            type Ux = u16;
+        }
+        ///`read()` method returns [uep3_dma__uh_tx_dma::R](R) reader structure
+        impl crate::Readable for UEP3_DMA__UH_TX_DMA_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep3_dma__uh_tx_dma::W](W) writer structure
+        impl crate::Writable for UEP3_DMA__UH_TX_DMA_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP3_DMA__UH_TX_DMA to value 0
+        impl crate::Resettable for UEP3_DMA__UH_TX_DMA_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP0_T_LEN (rw) register accessor: an alias for `Reg<UEP0_T_LEN_SPEC>`
+    pub type UEP0_T_LEN = crate::Reg<uep0_t_len::UEP0_T_LEN_SPEC>;
+    ///endpoint 0 transmittal length
+    pub mod uep0_t_len {
+        ///Register `UEP0_T_LEN` reader
+        pub struct R(crate::R<UEP0_T_LEN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP0_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP0_T_LEN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP0_T_LEN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP0_T_LEN` writer
+        pub struct W(crate::W<UEP0_T_LEN_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP0_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP0_T_LEN_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP0_T_LEN_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 0 transmittal length
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep0_t_len](index.html) module
+        pub struct UEP0_T_LEN_SPEC;
+        impl crate::RegisterSpec for UEP0_T_LEN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep0_t_len::R](R) reader structure
+        impl crate::Readable for UEP0_T_LEN_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep0_t_len::W](W) writer structure
+        impl crate::Writable for UEP0_T_LEN_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP0_T_LEN to value 0
+        impl crate::Resettable for UEP0_T_LEN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP0_CTRL (rw) register accessor: an alias for `Reg<UEP0_CTRL_SPEC>`
+    pub type UEP0_CTRL = crate::Reg<uep0_ctrl::UEP0_CTRL_SPEC>;
+    ///endpoint 0 control
+    pub mod uep0_ctrl {
+        ///Register `UEP0_CTRL` reader
+        pub struct R(crate::R<UEP0_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP0_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP0_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP0_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP0_CTRL` writer
+        pub struct W(crate::W<UEP0_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP0_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP0_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP0_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UEP_T_RES` reader - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_T_RES` writer - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP0_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `MASK_UEP_R_RES` reader - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_R_RES` writer - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP0_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UEP_AUTO_TOG` reader - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_AUTO_TOG` writer - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP0_CTRL_SPEC, bool, O>;
+        ///Field `UEP_T_TOG` reader - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_T_TOG` writer - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP0_CTRL_SPEC, bool, O>;
+        ///Field `UEP_R_TOG` reader - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_R_TOG` writer - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP0_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            pub fn mask_uep_t_res(&self) -> MASK_UEP_T_RES_R {
+                MASK_UEP_T_RES_R::new(self.bits & 3)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            pub fn mask_uep_r_res(&self) -> MASK_UEP_R_RES_R {
+                MASK_UEP_R_RES_R::new((self.bits >> 2) & 3)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            pub fn uep_auto_tog(&self) -> UEP_AUTO_TOG_R {
+                UEP_AUTO_TOG_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_t_tog(&self) -> UEP_T_TOG_R {
+                UEP_T_TOG_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_r_tog(&self) -> UEP_R_TOG_R {
+                UEP_R_TOG_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_t_res(&mut self) -> MASK_UEP_T_RES_W<0> {
+                MASK_UEP_T_RES_W::new(self)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_r_res(&mut self) -> MASK_UEP_R_RES_W<2> {
+                MASK_UEP_R_RES_W::new(self)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_auto_tog(&mut self) -> UEP_AUTO_TOG_W<4> {
+                UEP_AUTO_TOG_W::new(self)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_t_tog(&mut self) -> UEP_T_TOG_W<6> {
+                UEP_T_TOG_W::new(self)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_r_tog(&mut self) -> UEP_R_TOG_W<7> {
+                UEP_R_TOG_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 0 control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep0_ctrl](index.html) module
+        pub struct UEP0_CTRL_SPEC;
+        impl crate::RegisterSpec for UEP0_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep0_ctrl::R](R) reader structure
+        impl crate::Readable for UEP0_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep0_ctrl::W](W) writer structure
+        impl crate::Writable for UEP0_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP0_CTRL to value 0
+        impl crate::Resettable for UEP0_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP1_T_LEN (rw) register accessor: an alias for `Reg<UEP1_T_LEN_SPEC>`
+    pub type UEP1_T_LEN = crate::Reg<uep1_t_len::UEP1_T_LEN_SPEC>;
+    ///endpoint 1 transmittal length
+    pub mod uep1_t_len {
+        ///Register `UEP1_T_LEN` reader
+        pub struct R(crate::R<UEP1_T_LEN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP1_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP1_T_LEN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP1_T_LEN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP1_T_LEN` writer
+        pub struct W(crate::W<UEP1_T_LEN_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP1_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP1_T_LEN_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP1_T_LEN_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 1 transmittal length
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep1_t_len](index.html) module
+        pub struct UEP1_T_LEN_SPEC;
+        impl crate::RegisterSpec for UEP1_T_LEN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep1_t_len::R](R) reader structure
+        impl crate::Readable for UEP1_T_LEN_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep1_t_len::W](W) writer structure
+        impl crate::Writable for UEP1_T_LEN_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP1_T_LEN to value 0
+        impl crate::Resettable for UEP1_T_LEN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP1_CTRL__UH_SETUP (rw) register accessor: an alias for `Reg<UEP1_CTRL__UH_SETUP_SPEC>`
+    pub type UEP1_CTRL__UH_SETUP =
+        crate::Reg<uep1_ctrl__uh_setup::UEP1_CTRL__UH_SETUP_SPEC>;
+    ///endpoint 1 control;host aux setup
+    pub mod uep1_ctrl__uh_setup {
+        ///Register `UEP1_CTRL__UH_SETUP` reader
+        pub struct R(crate::R<UEP1_CTRL__UH_SETUP_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP1_CTRL__UH_SETUP_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP1_CTRL__UH_SETUP_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP1_CTRL__UH_SETUP_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP1_CTRL__UH_SETUP` writer
+        pub struct W(crate::W<UEP1_CTRL__UH_SETUP_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP1_CTRL__UH_SETUP_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP1_CTRL__UH_SETUP_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP1_CTRL__UH_SETUP_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UEP_T_RES` reader - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_T_RES` writer - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP1_CTRL__UH_SETUP_SPEC, u8, u8, 2, O>;
+        ///Field `MASK_UEP_R_RES` reader - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_R_RES` writer - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP1_CTRL__UH_SETUP_SPEC, u8, u8, 2, O>;
+        ///Field `UEP_AUTO_TOG` reader - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_AUTO_TOG` writer - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP1_CTRL__UH_SETUP_SPEC, bool, O>;
+        ///Field `UEP_T_TOG__UH_SOF_EN` reader - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1;USB host automatic SOF enable
+        pub type UEP_T_TOG__UH_SOF_EN_R = crate::BitReader<bool>;
+        ///Field `UEP_T_TOG__UH_SOF_EN` writer - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1;USB host automatic SOF enable
+        pub type UEP_T_TOG__UH_SOF_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP1_CTRL__UH_SETUP_SPEC, bool, O>;
+        ///Field `UEP_R_TOG__UH_PRE_PID_EN` reader - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;RB_UH_PRE_PID_EN;USB host PRE PID enable for low speed device via hub
+        pub type UEP_R_TOG__UH_PRE_PID_EN_R = crate::BitReader<bool>;
+        ///Field `UEP_R_TOG__UH_PRE_PID_EN` writer - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;RB_UH_PRE_PID_EN;USB host PRE PID enable for low speed device via hub
+        pub type UEP_R_TOG__UH_PRE_PID_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP1_CTRL__UH_SETUP_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            pub fn mask_uep_t_res(&self) -> MASK_UEP_T_RES_R {
+                MASK_UEP_T_RES_R::new(self.bits & 3)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            pub fn mask_uep_r_res(&self) -> MASK_UEP_R_RES_R {
+                MASK_UEP_R_RES_R::new((self.bits >> 2) & 3)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            pub fn uep_auto_tog(&self) -> UEP_AUTO_TOG_R {
+                UEP_AUTO_TOG_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1;USB host automatic SOF enable
+            #[inline(always)]
+            pub fn uep_t_tog__uh_sof_en(&self) -> UEP_T_TOG__UH_SOF_EN_R {
+                UEP_T_TOG__UH_SOF_EN_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;RB_UH_PRE_PID_EN;USB host PRE PID enable for low speed device via hub
+            #[inline(always)]
+            pub fn uep_r_tog__uh_pre_pid_en(&self) -> UEP_R_TOG__UH_PRE_PID_EN_R {
+                UEP_R_TOG__UH_PRE_PID_EN_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_t_res(&mut self) -> MASK_UEP_T_RES_W<0> {
+                MASK_UEP_T_RES_W::new(self)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_r_res(&mut self) -> MASK_UEP_R_RES_W<2> {
+                MASK_UEP_R_RES_W::new(self)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_auto_tog(&mut self) -> UEP_AUTO_TOG_W<4> {
+                UEP_AUTO_TOG_W::new(self)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1;USB host automatic SOF enable
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_t_tog__uh_sof_en(&mut self) -> UEP_T_TOG__UH_SOF_EN_W<6> {
+                UEP_T_TOG__UH_SOF_EN_W::new(self)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;RB_UH_PRE_PID_EN;USB host PRE PID enable for low speed device via hub
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_r_tog__uh_pre_pid_en(&mut self) -> UEP_R_TOG__UH_PRE_PID_EN_W<7> {
+                UEP_R_TOG__UH_PRE_PID_EN_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 1 control;host aux setup
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep1_ctrl__uh_setup](index.html) module
+        pub struct UEP1_CTRL__UH_SETUP_SPEC;
+        impl crate::RegisterSpec for UEP1_CTRL__UH_SETUP_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep1_ctrl__uh_setup::R](R) reader structure
+        impl crate::Readable for UEP1_CTRL__UH_SETUP_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep1_ctrl__uh_setup::W](W) writer structure
+        impl crate::Writable for UEP1_CTRL__UH_SETUP_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP1_CTRL__UH_SETUP to value 0
+        impl crate::Resettable for UEP1_CTRL__UH_SETUP_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP2_T_LEN__UH_EP_PID (rw) register accessor: an alias for `Reg<UEP2_T_LEN__UH_EP_PID_SPEC>`
+    pub type UEP2_T_LEN__UH_EP_PID =
+        crate::Reg<uep2_t_len__uh_ep_pid::UEP2_T_LEN__UH_EP_PID_SPEC>;
+    ///endpoint 2 transmittal length;host endpoint and PID
+    pub mod uep2_t_len__uh_ep_pid {
+        ///Register `UEP2_T_LEN__UH_EP_PID` reader
+        pub struct R(crate::R<UEP2_T_LEN__UH_EP_PID_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP2_T_LEN__UH_EP_PID_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP2_T_LEN__UH_EP_PID_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP2_T_LEN__UH_EP_PID_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP2_T_LEN__UH_EP_PID` writer
+        pub struct W(crate::W<UEP2_T_LEN__UH_EP_PID_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP2_T_LEN__UH_EP_PID_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP2_T_LEN__UH_EP_PID_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP2_T_LEN__UH_EP_PID_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UH_ENDP` reader - bit mask of endpoint number for USB host transfer
+        pub type MASK_UH_ENDP_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UH_ENDP` writer - bit mask of endpoint number for USB host transfer
+        pub type MASK_UH_ENDP_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP2_T_LEN__UH_EP_PID_SPEC, u8, u8, 4, O>;
+        ///Field `MASK_UH_TOKEN` reader - bit mask of token PID for USB host transfer
+        pub type MASK_UH_TOKEN_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UH_TOKEN` writer - bit mask of token PID for USB host transfer
+        pub type MASK_UH_TOKEN_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP2_T_LEN__UH_EP_PID_SPEC, u8, u8, 4, O>;
+        impl R {
+            ///Bits 0:3 - bit mask of endpoint number for USB host transfer
+            #[inline(always)]
+            pub fn mask_uh_endp(&self) -> MASK_UH_ENDP_R {
+                MASK_UH_ENDP_R::new(self.bits & 0x0f)
+            }
+            ///Bits 4:7 - bit mask of token PID for USB host transfer
+            #[inline(always)]
+            pub fn mask_uh_token(&self) -> MASK_UH_TOKEN_R {
+                MASK_UH_TOKEN_R::new((self.bits >> 4) & 0x0f)
+            }
+        }
+        impl W {
+            ///Bits 0:3 - bit mask of endpoint number for USB host transfer
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uh_endp(&mut self) -> MASK_UH_ENDP_W<0> {
+                MASK_UH_ENDP_W::new(self)
+            }
+            ///Bits 4:7 - bit mask of token PID for USB host transfer
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uh_token(&mut self) -> MASK_UH_TOKEN_W<4> {
+                MASK_UH_TOKEN_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 2 transmittal length;host endpoint and PID
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep2_t_len__uh_ep_pid](index.html) module
+        pub struct UEP2_T_LEN__UH_EP_PID_SPEC;
+        impl crate::RegisterSpec for UEP2_T_LEN__UH_EP_PID_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep2_t_len__uh_ep_pid::R](R) reader structure
+        impl crate::Readable for UEP2_T_LEN__UH_EP_PID_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep2_t_len__uh_ep_pid::W](W) writer structure
+        impl crate::Writable for UEP2_T_LEN__UH_EP_PID_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP2_T_LEN__UH_EP_PID to value 0
+        impl crate::Resettable for UEP2_T_LEN__UH_EP_PID_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP2_CTRL__UH_RX_CTRL (rw) register accessor: an alias for `Reg<UEP2_CTRL__UH_RX_CTRL_SPEC>`
+    pub type UEP2_CTRL__UH_RX_CTRL =
+        crate::Reg<uep2_ctrl__uh_rx_ctrl::UEP2_CTRL__UH_RX_CTRL_SPEC>;
+    ///endpoint 2 control;host receiver endpoint control
+    pub mod uep2_ctrl__uh_rx_ctrl {
+        ///Register `UEP2_CTRL__UH_RX_CTRL` reader
+        pub struct R(crate::R<UEP2_CTRL__UH_RX_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP2_CTRL__UH_RX_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP2_CTRL__UH_RX_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP2_CTRL__UH_RX_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP2_CTRL__UH_RX_CTRL` writer
+        pub struct W(crate::W<UEP2_CTRL__UH_RX_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP2_CTRL__UH_RX_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP2_CTRL__UH_RX_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP2_CTRL__UH_RX_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UEP_T_RES` reader - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_T_RES` writer - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP2_CTRL__UH_RX_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `MASK_UEP_R_RES` reader - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_R_RES` writer - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP2_CTRL__UH_RX_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UEP_AUTO_TOG__UH_R_AUTO_TOG` reader - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle;enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG__UH_R_AUTO_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_AUTO_TOG__UH_R_AUTO_TOG` writer - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle;enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG__UH_R_AUTO_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_CTRL__UH_RX_CTRL_SPEC, bool, O>;
+        ///Field `UEP_T_TOG` reader - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_T_TOG` writer - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_CTRL__UH_RX_CTRL_SPEC, bool, O>;
+        ///Field `UEP_R_TOG__UH_R_TOG` reader - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;expected data toggle flag of host receiving (IN): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG__UH_R_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_R_TOG__UH_R_TOG` writer - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;expected data toggle flag of host receiving (IN): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG__UH_R_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP2_CTRL__UH_RX_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            pub fn mask_uep_t_res(&self) -> MASK_UEP_T_RES_R {
+                MASK_UEP_T_RES_R::new(self.bits & 3)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            pub fn mask_uep_r_res(&self) -> MASK_UEP_R_RES_R {
+                MASK_UEP_R_RES_R::new((self.bits >> 2) & 3)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle;enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            pub fn uep_auto_tog__uh_r_auto_tog(&self) -> UEP_AUTO_TOG__UH_R_AUTO_TOG_R {
+                UEP_AUTO_TOG__UH_R_AUTO_TOG_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_t_tog(&self) -> UEP_T_TOG_R {
+                UEP_T_TOG_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;expected data toggle flag of host receiving (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_r_tog__uh_r_tog(&self) -> UEP_R_TOG__UH_R_TOG_R {
+                UEP_R_TOG__UH_R_TOG_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_t_res(&mut self) -> MASK_UEP_T_RES_W<0> {
+                MASK_UEP_T_RES_W::new(self)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_r_res(&mut self) -> MASK_UEP_R_RES_W<2> {
+                MASK_UEP_R_RES_W::new(self)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle;enable automatic toggle after successful transfer completion: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_auto_tog__uh_r_auto_tog(
+                &mut self,
+            ) -> UEP_AUTO_TOG__UH_R_AUTO_TOG_W<4> {
+                UEP_AUTO_TOG__UH_R_AUTO_TOG_W::new(self)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_t_tog(&mut self) -> UEP_T_TOG_W<6> {
+                UEP_T_TOG_W::new(self)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1;expected data toggle flag of host receiving (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_r_tog__uh_r_tog(&mut self) -> UEP_R_TOG__UH_R_TOG_W<7> {
+                UEP_R_TOG__UH_R_TOG_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 2 control;host receiver endpoint control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep2_ctrl__uh_rx_ctrl](index.html) module
+        pub struct UEP2_CTRL__UH_RX_CTRL_SPEC;
+        impl crate::RegisterSpec for UEP2_CTRL__UH_RX_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep2_ctrl__uh_rx_ctrl::R](R) reader structure
+        impl crate::Readable for UEP2_CTRL__UH_RX_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep2_ctrl__uh_rx_ctrl::W](W) writer structure
+        impl crate::Writable for UEP2_CTRL__UH_RX_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP2_CTRL__UH_RX_CTRL to value 0
+        impl crate::Resettable for UEP2_CTRL__UH_RX_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP3_T_LEN__UH_TX_LEN (rw) register accessor: an alias for `Reg<UEP3_T_LEN__UH_TX_LEN_SPEC>`
+    pub type UEP3_T_LEN__UH_TX_LEN =
+        crate::Reg<uep3_t_len__uh_tx_len::UEP3_T_LEN__UH_TX_LEN_SPEC>;
+    ///endpoint 3 transmittal length;host transmittal endpoint transmittal length
+    pub mod uep3_t_len__uh_tx_len {
+        ///Register `UEP3_T_LEN__UH_TX_LEN` reader
+        pub struct R(crate::R<UEP3_T_LEN__UH_TX_LEN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP3_T_LEN__UH_TX_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP3_T_LEN__UH_TX_LEN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP3_T_LEN__UH_TX_LEN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP3_T_LEN__UH_TX_LEN` writer
+        pub struct W(crate::W<UEP3_T_LEN__UH_TX_LEN_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP3_T_LEN__UH_TX_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP3_T_LEN__UH_TX_LEN_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP3_T_LEN__UH_TX_LEN_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 3 transmittal length;host transmittal endpoint transmittal length
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep3_t_len__uh_tx_len](index.html) module
+        pub struct UEP3_T_LEN__UH_TX_LEN_SPEC;
+        impl crate::RegisterSpec for UEP3_T_LEN__UH_TX_LEN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep3_t_len__uh_tx_len::R](R) reader structure
+        impl crate::Readable for UEP3_T_LEN__UH_TX_LEN_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep3_t_len__uh_tx_len::W](W) writer structure
+        impl crate::Writable for UEP3_T_LEN__UH_TX_LEN_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP3_T_LEN__UH_TX_LEN to value 0
+        impl crate::Resettable for UEP3_T_LEN__UH_TX_LEN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP3_CTRL__UH_TX_CTRL (rw) register accessor: an alias for `Reg<UEP3_CTRL__UH_TX_CTRL_SPEC>`
+    pub type UEP3_CTRL__UH_TX_CTRL =
+        crate::Reg<uep3_ctrl__uh_tx_ctrl::UEP3_CTRL__UH_TX_CTRL_SPEC>;
+    ///endpoint 3 control;host transmittal endpoint control
+    pub mod uep3_ctrl__uh_tx_ctrl {
+        ///Register `UEP3_CTRL__UH_TX_CTRL` reader
+        pub struct R(crate::R<UEP3_CTRL__UH_TX_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP3_CTRL__UH_TX_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP3_CTRL__UH_TX_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP3_CTRL__UH_TX_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP3_CTRL__UH_TX_CTRL` writer
+        pub struct W(crate::W<UEP3_CTRL__UH_TX_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP3_CTRL__UH_TX_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP3_CTRL__UH_TX_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP3_CTRL__UH_TX_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UEP_T_RES` reader - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_T_RES` writer - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP3_CTRL__UH_TX_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `MASK_UEP_R_RES` reader - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_R_RES` writer - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP3_CTRL__UH_TX_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UEP_AUTO_TOG` reader - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_AUTO_TOG` writer - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP3_CTRL__UH_TX_CTRL_SPEC, bool, O>;
+        ///Field `UEP_T_TOG` reader - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_T_TOG` writer - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP3_CTRL__UH_TX_CTRL_SPEC, bool, O>;
+        ///Field `UEP_R_TOG` reader - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_R_TOG` writer - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP3_CTRL__UH_TX_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            pub fn mask_uep_t_res(&self) -> MASK_UEP_T_RES_R {
+                MASK_UEP_T_RES_R::new(self.bits & 3)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            pub fn mask_uep_r_res(&self) -> MASK_UEP_R_RES_R {
+                MASK_UEP_R_RES_R::new((self.bits >> 2) & 3)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            pub fn uep_auto_tog(&self) -> UEP_AUTO_TOG_R {
+                UEP_AUTO_TOG_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_t_tog(&self) -> UEP_T_TOG_R {
+                UEP_T_TOG_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_r_tog(&self) -> UEP_R_TOG_R {
+                UEP_R_TOG_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_t_res(&mut self) -> MASK_UEP_T_RES_W<0> {
+                MASK_UEP_T_RES_W::new(self)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_r_res(&mut self) -> MASK_UEP_R_RES_W<2> {
+                MASK_UEP_R_RES_W::new(self)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_auto_tog(&mut self) -> UEP_AUTO_TOG_W<4> {
+                UEP_AUTO_TOG_W::new(self)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_t_tog(&mut self) -> UEP_T_TOG_W<6> {
+                UEP_T_TOG_W::new(self)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_r_tog(&mut self) -> UEP_R_TOG_W<7> {
+                UEP_R_TOG_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 3 control;host transmittal endpoint control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep3_ctrl__uh_tx_ctrl](index.html) module
+        pub struct UEP3_CTRL__UH_TX_CTRL_SPEC;
+        impl crate::RegisterSpec for UEP3_CTRL__UH_TX_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep3_ctrl__uh_tx_ctrl::R](R) reader structure
+        impl crate::Readable for UEP3_CTRL__UH_TX_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep3_ctrl__uh_tx_ctrl::W](W) writer structure
+        impl crate::Writable for UEP3_CTRL__UH_TX_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP3_CTRL__UH_TX_CTRL to value 0
+        impl crate::Resettable for UEP3_CTRL__UH_TX_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP4_T_LEN (rw) register accessor: an alias for `Reg<UEP4_T_LEN_SPEC>`
+    pub type UEP4_T_LEN = crate::Reg<uep4_t_len::UEP4_T_LEN_SPEC>;
+    ///endpoint 4 transmittal length
+    pub mod uep4_t_len {
+        ///Register `UEP4_T_LEN` reader
+        pub struct R(crate::R<UEP4_T_LEN_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP4_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP4_T_LEN_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP4_T_LEN_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP4_T_LEN` writer
+        pub struct W(crate::W<UEP4_T_LEN_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP4_T_LEN_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP4_T_LEN_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP4_T_LEN_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        impl W {
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 4 transmittal length
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep4_t_len](index.html) module
+        pub struct UEP4_T_LEN_SPEC;
+        impl crate::RegisterSpec for UEP4_T_LEN_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep4_t_len::R](R) reader structure
+        impl crate::Readable for UEP4_T_LEN_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep4_t_len::W](W) writer structure
+        impl crate::Writable for UEP4_T_LEN_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP4_T_LEN to value 0
+        impl crate::Resettable for UEP4_T_LEN_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///UEP4_CTRL (rw) register accessor: an alias for `Reg<UEP4_CTRL_SPEC>`
+    pub type UEP4_CTRL = crate::Reg<uep4_ctrl::UEP4_CTRL_SPEC>;
+    ///endpoint 4 control
+    pub mod uep4_ctrl {
+        ///Register `UEP4_CTRL` reader
+        pub struct R(crate::R<UEP4_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<UEP4_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<UEP4_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<UEP4_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `UEP4_CTRL` writer
+        pub struct W(crate::W<UEP4_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<UEP4_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<UEP4_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<UEP4_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `MASK_UEP_T_RES` reader - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_T_RES` writer - bit mask of handshake response type for USB endpoint X transmittal (IN)
+        pub type MASK_UEP_T_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP4_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `MASK_UEP_R_RES` reader - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_R = crate::FieldReader<u8, u8>;
+        ///Field `MASK_UEP_R_RES` writer - bit mask of handshake response type for USB endpoint X receiving (OUT)
+        pub type MASK_UEP_R_RES_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, UEP4_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UEP_AUTO_TOG` reader - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_AUTO_TOG` writer - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+        pub type UEP_AUTO_TOG_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, UEP4_CTRL_SPEC, bool, O>;
+        ///Field `UEP_T_TOG` reader - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_T_TOG` writer - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+        pub type UEP_T_TOG_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_CTRL_SPEC, bool, O>;
+        ///Field `UEP_R_TOG` reader - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_R = crate::BitReader<bool>;
+        ///Field `UEP_R_TOG` writer - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+        pub type UEP_R_TOG_W<'a, const O: u8> = crate::BitWriter<'a, u8, UEP4_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            pub fn mask_uep_t_res(&self) -> MASK_UEP_T_RES_R {
+                MASK_UEP_T_RES_R::new(self.bits & 3)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            pub fn mask_uep_r_res(&self) -> MASK_UEP_R_RES_R {
+                MASK_UEP_R_RES_R::new((self.bits >> 2) & 3)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            pub fn uep_auto_tog(&self) -> UEP_AUTO_TOG_R {
+                UEP_AUTO_TOG_R::new(((self.bits >> 4) & 1) != 0)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_t_tog(&self) -> UEP_T_TOG_R {
+                UEP_T_TOG_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            pub fn uep_r_tog(&self) -> UEP_R_TOG_R {
+                UEP_R_TOG_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - bit mask of handshake response type for USB endpoint X transmittal (IN)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_t_res(&mut self) -> MASK_UEP_T_RES_W<0> {
+                MASK_UEP_T_RES_W::new(self)
+            }
+            ///Bits 2:3 - bit mask of handshake response type for USB endpoint X receiving (OUT)
+            #[inline(always)]
+            #[must_use]
+            pub fn mask_uep_r_res(&mut self) -> MASK_UEP_R_RES_W<2> {
+                MASK_UEP_R_RES_W::new(self)
+            }
+            ///Bit 4 - enable automatic toggle after successful transfer completion on endpoint 1/2/3: 0=manual toggle, 1=automatic toggle
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_auto_tog(&mut self) -> UEP_AUTO_TOG_W<4> {
+                UEP_AUTO_TOG_W::new(self)
+            }
+            ///Bit 6 - prepared data toggle flag of USB endpoint X transmittal (IN): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_t_tog(&mut self) -> UEP_T_TOG_W<6> {
+                UEP_T_TOG_W::new(self)
+            }
+            ///Bit 7 - expected data toggle flag of USB endpoint X receiving (OUT): 0=DATA0, 1=DATA1
+            #[inline(always)]
+            #[must_use]
+            pub fn uep_r_tog(&mut self) -> UEP_R_TOG_W<7> {
+                UEP_R_TOG_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///endpoint 4 control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [uep4_ctrl](index.html) module
+        pub struct UEP4_CTRL_SPEC;
+        impl crate::RegisterSpec for UEP4_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [uep4_ctrl::R](R) reader structure
+        impl crate::Readable for UEP4_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [uep4_ctrl::W](W) writer structure
+        impl crate::Writable for UEP4_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets UEP4_CTRL to value 0
+        impl crate::Resettable for UEP4_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+    ///USB_TYPE_C_CTRL (rw) register accessor: an alias for `Reg<USB_TYPE_C_CTRL_SPEC>`
+    pub type USB_TYPE_C_CTRL = crate::Reg<usb_type_c_ctrl::USB_TYPE_C_CTRL_SPEC>;
+    ///USB type-C control
+    pub mod usb_type_c_ctrl {
+        ///Register `USB_TYPE_C_CTRL` reader
+        pub struct R(crate::R<USB_TYPE_C_CTRL_SPEC>);
+        impl core::ops::Deref for R {
+            type Target = crate::R<USB_TYPE_C_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl From<crate::R<USB_TYPE_C_CTRL_SPEC>> for R {
+            #[inline(always)]
+            fn from(reader: crate::R<USB_TYPE_C_CTRL_SPEC>) -> Self {
+                R(reader)
+            }
+        }
+        ///Register `USB_TYPE_C_CTRL` writer
+        pub struct W(crate::W<USB_TYPE_C_CTRL_SPEC>);
+        impl core::ops::Deref for W {
+            type Target = crate::W<USB_TYPE_C_CTRL_SPEC>;
+            #[inline(always)]
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+        impl core::ops::DerefMut for W {
+            #[inline(always)]
+            fn deref_mut(&mut self) -> &mut Self::Target {
+                &mut self.0
+            }
+        }
+        impl From<crate::W<USB_TYPE_C_CTRL_SPEC>> for W {
+            #[inline(always)]
+            fn from(writer: crate::W<USB_TYPE_C_CTRL_SPEC>) -> Self {
+                W(writer)
+            }
+        }
+        ///Field `UCC1_PU_EN` reader - USB CC1 pullup resistance control
+        pub type UCC1_PU_EN_R = crate::FieldReader<u8, u8>;
+        ///Field `UCC1_PU_EN` writer - USB CC1 pullup resistance control
+        pub type UCC1_PU_EN_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UCC1_PD_EN` reader - USB CC1 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+        pub type UCC1_PD_EN_R = crate::BitReader<bool>;
+        ///Field `UCC1_PD_EN` writer - USB CC1 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+        pub type UCC1_PD_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, bool, O>;
+        ///Field `VBUS_PD_EN` reader - USB VBUS 10K pulldown resistance: 0=disable, 1=enable pullup
+        pub type VBUS_PD_EN_R = crate::BitReader<bool>;
+        ///Field `VBUS_PD_EN` writer - USB VBUS 10K pulldown resistance: 0=disable, 1=enable pullup
+        pub type VBUS_PD_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, bool, O>;
+        ///Field `UCC2_PU_EN` reader - USB CC2 pullup resistance control
+        pub type UCC2_PU_EN_R = crate::FieldReader<u8, u8>;
+        ///Field `UCC2_PU_EN` writer - USB CC2 pullup resistance control
+        pub type UCC2_PU_EN_W<'a, const O: u8> =
+            crate::FieldWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, u8, u8, 2, O>;
+        ///Field `UCC2_PD_EN` reader - USB CC2 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+        pub type UCC2_PD_EN_R = crate::BitReader<bool>;
+        ///Field `UCC2_PD_EN` writer - USB CC2 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+        pub type UCC2_PD_EN_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, bool, O>;
+        ///Field `UTCC_GP_BIT` reader - USB general purpose bit
+        pub type UTCC_GP_BIT_R = crate::BitReader<bool>;
+        ///Field `UTCC_GP_BIT` writer - USB general purpose bit
+        pub type UTCC_GP_BIT_W<'a, const O: u8> =
+            crate::BitWriter<'a, u8, USB_TYPE_C_CTRL_SPEC, bool, O>;
+        impl R {
+            ///Bits 0:1 - USB CC1 pullup resistance control
+            #[inline(always)]
+            pub fn ucc1_pu_en(&self) -> UCC1_PU_EN_R {
+                UCC1_PU_EN_R::new(self.bits & 3)
+            }
+            ///Bit 2 - USB CC1 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+            #[inline(always)]
+            pub fn ucc1_pd_en(&self) -> UCC1_PD_EN_R {
+                UCC1_PD_EN_R::new(((self.bits >> 2) & 1) != 0)
+            }
+            ///Bit 3 - USB VBUS 10K pulldown resistance: 0=disable, 1=enable pullup
+            #[inline(always)]
+            pub fn vbus_pd_en(&self) -> VBUS_PD_EN_R {
+                VBUS_PD_EN_R::new(((self.bits >> 3) & 1) != 0)
+            }
+            ///Bits 4:5 - USB CC2 pullup resistance control
+            #[inline(always)]
+            pub fn ucc2_pu_en(&self) -> UCC2_PU_EN_R {
+                UCC2_PU_EN_R::new((self.bits >> 4) & 3)
+            }
+            ///Bit 6 - USB CC2 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+            #[inline(always)]
+            pub fn ucc2_pd_en(&self) -> UCC2_PD_EN_R {
+                UCC2_PD_EN_R::new(((self.bits >> 6) & 1) != 0)
+            }
+            ///Bit 7 - USB general purpose bit
+            #[inline(always)]
+            pub fn utcc_gp_bit(&self) -> UTCC_GP_BIT_R {
+                UTCC_GP_BIT_R::new(((self.bits >> 7) & 1) != 0)
+            }
+        }
+        impl W {
+            ///Bits 0:1 - USB CC1 pullup resistance control
+            #[inline(always)]
+            #[must_use]
+            pub fn ucc1_pu_en(&mut self) -> UCC1_PU_EN_W<0> {
+                UCC1_PU_EN_W::new(self)
+            }
+            ///Bit 2 - USB CC1 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+            #[inline(always)]
+            #[must_use]
+            pub fn ucc1_pd_en(&mut self) -> UCC1_PD_EN_W<2> {
+                UCC1_PD_EN_W::new(self)
+            }
+            ///Bit 3 - USB VBUS 10K pulldown resistance: 0=disable, 1=enable pullup
+            #[inline(always)]
+            #[must_use]
+            pub fn vbus_pd_en(&mut self) -> VBUS_PD_EN_W<3> {
+                VBUS_PD_EN_W::new(self)
+            }
+            ///Bits 4:5 - USB CC2 pullup resistance control
+            #[inline(always)]
+            #[must_use]
+            pub fn ucc2_pu_en(&mut self) -> UCC2_PU_EN_W<4> {
+                UCC2_PU_EN_W::new(self)
+            }
+            ///Bit 6 - USB CC2 5.1K pulldown resistance: 0=disable, 1=enable pulldown
+            #[inline(always)]
+            #[must_use]
+            pub fn ucc2_pd_en(&mut self) -> UCC2_PD_EN_W<6> {
+                UCC2_PD_EN_W::new(self)
+            }
+            ///Bit 7 - USB general purpose bit
+            #[inline(always)]
+            #[must_use]
+            pub fn utcc_gp_bit(&mut self) -> UTCC_GP_BIT_W<7> {
+                UTCC_GP_BIT_W::new(self)
+            }
+            ///Writes raw bits to the register.
+            #[inline(always)]
+            pub unsafe fn bits(&mut self, bits: u8) -> &mut Self {
+                self.0.bits(bits);
+                self
+            }
+        }
+        ///USB type-C control
+        ///
+        ///This register you can [`read`](crate::generic::Reg::read), [`write_with_zero`](crate::generic::Reg::write_with_zero), [`reset`](crate::generic::Reg::reset), [`write`](crate::generic::Reg::write), [`modify`](crate::generic::Reg::modify). See [API](https://docs.rs/svd2rust/#read--modify--write-api).
+        ///
+        ///For information about available fields see [usb_type_c_ctrl](index.html) module
+        pub struct USB_TYPE_C_CTRL_SPEC;
+        impl crate::RegisterSpec for USB_TYPE_C_CTRL_SPEC {
+            type Ux = u8;
+        }
+        ///`read()` method returns [usb_type_c_ctrl::R](R) reader structure
+        impl crate::Readable for USB_TYPE_C_CTRL_SPEC {
+            type Reader = R;
+        }
+        ///`write(|w| ..)` method takes [usb_type_c_ctrl::W](W) writer structure
+        impl crate::Writable for USB_TYPE_C_CTRL_SPEC {
+            type Writer = W;
+            const ZERO_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+            const ONE_TO_MODIFY_FIELDS_BITMAP: Self::Ux = 0;
+        }
+        ///`reset()` method sets USB_TYPE_C_CTRL to value 0
+        impl crate::Resettable for USB_TYPE_C_CTRL_SPEC {
+            const RESET_VALUE: Self::Ux = 0;
+        }
+    }
+}
+#[cfg(not(feature = "ch32v103"))]
 pub mod usbhd {
     ///Register block
     #[repr(C)]
